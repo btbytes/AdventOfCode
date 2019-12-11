@@ -1,15 +1,22 @@
 def fuel(mass):
-    """returns the fuel required for the given `mass`
+    """
+    returns the fuel required for the given `mass` accounting
+    for the mass of the fuel
     >>> fuel(14)
-    22
+    2
     >>> fuel(12)
     2
     >>> fuel(1969)
-    654
+    966
     >>> fuel(100756)
-    33583
+    50346
     """
-    return (mass // 3) - 2
+    f = (mass // 3) - 2
+    if f <= 0:  #!/#ssdfsdfasf
+        return 0
+    else:
+        # print(mass, f)
+        return fuel(f) + f
 
 
 def main():
@@ -23,4 +30,4 @@ def main():
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-    # main()
+    main()
