@@ -2,7 +2,7 @@
 # Brute force solution
 # Output :
 # answer : 203481432
-# time   : 3.72s
+# time   : 1.14s
 
 import sys
 import time
@@ -10,12 +10,12 @@ import time
 start = time.time()
 
 with open('01.txt') as f:
-	expenses = [l.strip() for l in f]
+    expenses = [int(l.strip()) for l in f]
 
 for i in expenses:
-	for j in expenses:
-		for k in expenses:
-			if int(i)+int(j)+int(k) == 2020:
-				print(f'answer : {int(i) * int(j) * int(k)}')
-				print(f'time   : %.2fs' % (time.time() - start, ) )
-				sys.exit(0)
+    for j in expenses:
+        for k in expenses:
+            if i + j + k == 2020:
+                print(f'answer : {i * j * k}')
+                print(f'time   : %.2fs' % (time.time() - start, ) )
+                sys.exit(0)
