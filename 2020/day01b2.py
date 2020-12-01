@@ -14,8 +14,8 @@ with open('01.txt') as f:
 
 for ii, i in enumerate(expenses):
     for jj, j in enumerate(expenses[ii:]):
-        for kk, k in enumerate(expenses[ii+jj:]):
+        for k in expenses[ii+jj:]:
             if i + j + k == 2020:
                 print(f'answer : {i * j * k}')
-                print(f'time   : %.2fs' % (time.time() - start, ) )
+                print(f'time   : {time.time() - start:%.2f}s')
                 sys.exit(0)
