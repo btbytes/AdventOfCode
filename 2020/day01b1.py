@@ -1,10 +1,8 @@
 # Day 1 - part b of the problem
 # Brute force solution
-
 # Output :
 # answer : 203481432
-# ops    : 12929356
-# time   : 4.28s
+# time   : 3.72s
 
 import sys
 import time

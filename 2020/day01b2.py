@@ -2,9 +2,7 @@
 # do not repeat over the numbers already picked
 # Output :
 # answer : 203481432
-# ops    : 3654046
-# time   : 1.32s
-
+# time   : 1.22s
 
 import sys
 import time
