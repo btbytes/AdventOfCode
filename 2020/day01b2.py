@@ -17,5 +17,5 @@ for ii, i in enumerate(expenses):
         for k in expenses[ii+jj:]:
             if i + j + k == 2020:
                 print(f'answer : {i * j * k}')
-                print(f'time   : {time.time() - start:.2f}s')
+                print(f'time   : {(time.time() - start)*1000:.2f}ms')
                 sys.exit(0)
