@@ -3,8 +3,6 @@
 Day 2, part b of the problem
 '''
 
-import string
-
 with open('02.txt') as f:
     lines = [l.strip() for l in f]
 
