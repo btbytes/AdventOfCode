@@ -17,26 +17,12 @@ with open('04.txt') as f:
 			nr = True
 
 
-def valid_byr(byr):
+def vr(yr, start, end):
 	try:
-		byr = int(byr)
-		return 1920 <= byr <=2002
+		return start <= int(yr) <= end
 	except:
 		return False
 
-def valid_iyr(iyr):
-	try:
-		iyr = int(iyr)
-		return 2010 <= iyr <=2020
-	except:
-		return False
-
-def valid_eyr(eyr):
-	try:
-		eyr = int(eyr)
-		return 2020 <= eyr <=2030
-	except:
-		return False
 
 def valid_hgt(hgt):
 	units = hgt[-2:].lower()
@@ -69,8 +55,8 @@ for l in passports:
 		k, v = part.split(':')
 		r[k] = v
 	if reqd.difference(set(r.keys())) in [set([]), set(['cid'])] \
-		and valid_byr(r['byr']) and valid_iyr(r['iyr']) \
-		and valid_eyr(r['eyr']) and valid_hgt(r['hgt']) \
+		and vr(r['byr'], 1920, 2002) and vr(r['iyr'], 2010, 2020) \
+		and vr(r['eyr'], 2020, 2030) and valid_hgt(r['hgt']) \
 		and valid_hcl(r['hcl']) and valid_ecl(r['ecl']) \
 		and valid_pid(r['pid']):
 		valids += 1
