@@ -1,50 +1,21 @@
 #!/usr/bin/env python
 # Day 4, Part B
-
-passports = []
 with open('04.txt') as f:
-	c = 0
-	nr = True
-	for line in f:
-		if line != '\n':
-			if nr == True:
-				passports.append(line.strip() + ' ')
-			else:
-				passports[c] += line.strip() + ' '
-			nr = False
-		else:
-			c += 1
-			nr = True
-
+	passports = [b.replace('\n', ' ') for b in f.read().split('\n\n')]
 
 def vr(yr, start, end):
-	try:
-		return start <= int(yr) <= end
-	except:
-		return False
-
+	return yr.isnumeric() and start <= int(yr) <= end
+	
 
 def valid_hgt(hgt):
 	units = hgt[-2:].lower()
-	if units not in ['cm', 'in']:
-		return False
-	ht = int(hgt[:-2])
-	try:
-		if units == 'cm':
-			return 150 <= ht <= 193
-		if units == 'in':
-			return 59 <= ht <= 76
-	except:
-		return False
-
-def valid_hcl(hcl):
-	return hcl[0] == '#' and all([c in '0123456789abcdef' for c in hcl[1:]])
-
-def valid_ecl(ecl):
-	return ecl.lower() in 'amb blu brn gry grn hzl oth'.split(' ')
-
-def valid_pid(pid):
-	return len(pid) == 9 and all([p.isdigit() for p in pid])
+	ht = hgt[:-2]
+	if units in ['cm', 'in'] and ht.isnumeric():
+		return {
+			'cm': 150 <= int(ht) <= 193,
+			'in': 59 <= int(ht) <= 76
+		}[units]
+	return False
 
 reqd = set('ecl pid eyr hcl byr iyr cid hgt'.split(' '))
 valids = 0
@@ -55,9 +26,12 @@ for l in passports:
 		k, v = part.split(':')
 		r[k] = v
 	if reqd.difference(set(r.keys())) in [set([]), set(['cid'])] \
-		and vr(r['byr'], 1920, 2002) and vr(r['iyr'], 2010, 2020) \
-		and vr(r['eyr'], 2020, 2030) and valid_hgt(r['hgt']) \
-		and valid_hcl(r['hcl']) and valid_ecl(r['ecl']) \
-		and valid_pid(r['pid']):
+		and vr(r['byr'], 1920, 2002) \
+		and vr(r['iyr'], 2010, 2020) \
+		and vr(r['eyr'], 2020, 2030) \
+		and valid_hgt(r['hgt']) \
+		and r['hcl'][0] == '#' and all([c in '0123456789abcdef' for c in r['hcl'][1:]]) \
+		and r['ecl'].lower() in 'amb blu brn gry grn hzl oth'.split(' ') \
+		and len(r['pid']) == 9 and r['pid'].isnumeric():
 		valids += 1
 print(valids)
